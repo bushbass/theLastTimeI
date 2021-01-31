@@ -4,7 +4,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function App() {
   // master list
-
+  useEffect(() => {
+    !JSON.parse(localStorage.events)
+      ? localStorage.setItem('events', [])
+      : null;
+  });
   const [events, setEvents] = useState(JSON.parse(localStorage.events));
   //temp state for forms
   const [currentEvent, setCurrentEvent] = useState('');
