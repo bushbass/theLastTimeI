@@ -1,28 +1,29 @@
-import { useEffect, useState } from "react";
-import "./styles.css";
-import { v4 as uuidv4 } from "uuid";
+import { useEffect, useState } from 'react';
+import './styles.css';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function App() {
   // master list
+
   const [events, setEvents] = useState(JSON.parse(localStorage.events));
   //temp state for forms
-  const [currentEvent, setCurrentEvent] = useState("");
-  const [date, setDate] = useState("");
+  const [currentEvent, setCurrentEvent] = useState('');
+  const [date, setDate] = useState('');
   const [renderToggle, setRenderToggle] = useState(true);
-  const [filterTerm, setFilterTerm] = useState("");
+  const [filterTerm, setFilterTerm] = useState('');
 
   const submitEvent = (e) => {
     e.preventDefault();
     if (!currentEvent) {
-      return alert("enter an event");
+      return alert('enter an event');
     }
     if (!date) {
-      return alert("enter a date");
+      return alert('enter a date');
     }
     setEvents((events) => [...events, { currentEvent, date, id: uuidv4() }]);
 
-    setCurrentEvent("");
-    setDate("");
+    setCurrentEvent('');
+    setDate('');
   };
 
   const sortOldest = () => {
@@ -53,30 +54,30 @@ export default function App() {
   };
 
   useEffect(() => {
-    localStorage.setItem("events", JSON.stringify(events));
+    localStorage.setItem('events', JSON.stringify(events));
   }, [events]);
 
   return (
-    <div className="App">
+    <div className='App'>
       <h1>The last time I ...</h1>
 
       <form>
-        <label htmlFor="currentEvent">Event</label>
+        <label htmlFor='currentEvent'>Event</label>
 
         <input
-          placeholder="add an event"
-          id="currentEvent"
-          type="text"
+          placeholder='add an event'
+          id='currentEvent'
+          type='text'
           value={currentEvent}
           onChange={(event) => setCurrentEvent(event.target.value)}
         />
         <br />
 
-        <label htmlFor="date">Date</label>
+        <label htmlFor='date'>Date</label>
 
         <input
-          id="date"
-          type="date"
+          id='date'
+          type='date'
           value={date}
           onChange={(event) => setDate(event.target.value)}
         />
@@ -86,14 +87,14 @@ export default function App() {
       <button onClick={sortNewest}>Newest first</button>
       <br />
       <input
-        type="text"
-        placeholder="filter events"
+        type='text'
+        placeholder='filter events'
         onChange={(event) => setFilterTerm(event.target.value)}
         value={filterTerm}
       />
-      <button onClick={() => setFilterTerm("")}>Clear filter</button>
+      <button onClick={() => setFilterTerm('')}>Clear filter</button>
 
-      {filterTerm === ""
+      {filterTerm === ''
         ? events.map((eachEvent) => {
             return (
               <div key={eachEvent.id}>
