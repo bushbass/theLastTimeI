@@ -3,13 +3,20 @@ import './styles.css';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function App() {
-  // master list
   useEffect(() => {
-    !JSON.parse(localStorage.events)
-      ? localStorage.setItem('events', [])
-      : null;
-  });
-  const [events, setEvents] = useState(JSON.parse(localStorage.events));
+    // check if events exists
+    localStorage.events === !null
+      ? // if yes , use it
+        localStorage.setItem('events', JSON.stringify(events))
+      : // if not, create blank
+        localStorage.setItem('events', []);
+  }),
+    [];
+
+  // master list
+  const [events, setEvents] = useState([
+    { currentEvent: 'example event', date: '2021-02-18', id: 444444 },
+  ]);
   //temp state for forms
   const [currentEvent, setCurrentEvent] = useState('');
   const [date, setDate] = useState('');
