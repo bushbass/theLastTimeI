@@ -3,19 +3,8 @@ import './styles.css';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function App() {
-  // useEffect(() => {
-  //   // check if events exists
-  //   localStorage.events === !null
-  //     ? // if yes , use it
-  //       localStorage.setItem('events', JSON.stringify(events))
-  //     : // if not, create blank
-  //       localStorage.setItem('events', []);
-  // }),
-  //   [];
-
   // master list
   const [events, setEvents] = useState(() => {
-    console.log('from state init');
     if (localStorage.events) {
       return JSON.parse(localStorage.events);
     } else {
@@ -51,7 +40,6 @@ export default function App() {
       }
       return 0;
     });
-
     setRenderToggle(!renderToggle);
   };
   const sortNewest = () => {
@@ -64,23 +52,18 @@ export default function App() {
       }
       return 0;
     });
-
     setRenderToggle(!renderToggle);
   };
 
   useEffect(() => {
-    console.log('from effect');
     localStorage.setItem('events', JSON.stringify(events));
   }, [events]);
 
   return (
     <div className='App'>
-      {console.log('from render')}
       <h1>The last time I ...</h1>
-
       <form>
         <label htmlFor='currentEvent'>Event</label>
-
         <input
           placeholder='add an event'
           id='currentEvent'
@@ -89,9 +72,7 @@ export default function App() {
           onChange={(event) => setCurrentEvent(event.target.value)}
         />
         <br />
-
         <label htmlFor='date'>Date</label>
-
         <input
           id='date'
           type='date'
