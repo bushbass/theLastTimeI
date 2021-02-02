@@ -99,6 +99,7 @@ export default function App() {
                 <p>
                   {eachEvent.currentEvent} -{eachEvent.date}
                   <button
+                    className='deleteButton'
                     onClick={() => {
                       setEvents(
                         events.filter((event) => event.id !== eachEvent.id)
@@ -113,13 +114,16 @@ export default function App() {
             );
           })
         : events
-            .filter((item) => item.currentEvent.includes(filterTerm))
+            .filter((item) =>
+              item.currentEvent.toLowerCase().includes(filterTerm.toLowerCase())
+            )
             .map((eachEvent) => {
               return (
                 <div key={eachEvent.id}>
                   <p>
                     {eachEvent.currentEvent} -{eachEvent.date}
                     <button
+                      className='deleteButton'
                       onClick={() => {
                         setEvents(
                           events.filter((event) => event.id !== eachEvent.id)
