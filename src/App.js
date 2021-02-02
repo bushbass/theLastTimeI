@@ -3,20 +3,25 @@ import './styles.css';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function App() {
-  useEffect(() => {
-    // check if events exists
-    localStorage.events === !null
-      ? // if yes , use it
-        localStorage.setItem('events', JSON.stringify(events))
-      : // if not, create blank
-        localStorage.setItem('events', []);
-  }),
-    [];
+  // useEffect(() => {
+  //   // check if events exists
+  //   localStorage.events === !null
+  //     ? // if yes , use it
+  //       localStorage.setItem('events', JSON.stringify(events))
+  //     : // if not, create blank
+  //       localStorage.setItem('events', []);
+  // }),
+  //   [];
 
   // master list
-  const [events, setEvents] = useState([
-    { currentEvent: 'example event', date: '2021-02-18', id: 444444 },
-  ]);
+  const [events, setEvents] = useState(() => {
+    console.log('from state init');
+    if (localStorage.events) {
+      return JSON.parse(localStorage.events);
+    } else {
+      return [];
+    }
+  });
   //temp state for forms
   const [currentEvent, setCurrentEvent] = useState('');
   const [date, setDate] = useState('');
@@ -32,7 +37,6 @@ export default function App() {
       return alert('enter a date');
     }
     setEvents((events) => [...events, { currentEvent, date, id: uuidv4() }]);
-
     setCurrentEvent('');
     setDate('');
   };
@@ -65,11 +69,13 @@ export default function App() {
   };
 
   useEffect(() => {
+    console.log('from effect');
     localStorage.setItem('events', JSON.stringify(events));
   }, [events]);
 
   return (
     <div className='App'>
+      {console.log('from render')}
       <h1>The last time I ...</h1>
 
       <form>
