@@ -83,8 +83,8 @@ export default function App() {
             onChange={(event) => setDate(event.target.value)}
           />
           <button onClick={submitEvent}>Add event</button>
-        </form>
-        <button onClick={sortOldest}>Oldest first</button>
+        </form><hr/>
+<p>        Sorting </p><button onClick={sortOldest}>Oldest first</button>
         <button onClick={sortNewest}>Newest first</button>
         <br />
         <input

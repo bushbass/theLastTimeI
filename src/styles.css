@@ -11,11 +11,21 @@
 
 input {
   margin: 10px;
+  border-radius: 5px;
+  border: 2px solid #6e7daf;
 }
 
 button {
   margin: 5px;
+  border-radius: 5px;
+  border: 2px solid #6e7daf;
 }
+
+button:hover {
+  background: #6e7daf;
+  transition: all 0.3s;
+}
+
 .container {
   max-width: 800px;
 }
